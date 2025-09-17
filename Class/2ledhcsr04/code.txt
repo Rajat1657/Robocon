@@ -1,0 +1,49 @@
+// C++ code
+//
+int trigPin = 9;
+int echoPin = 8;
+int led1pin = 13;
+int led2pin = 12;
+
+long duration;
+int distance;
+
+void setup()
+{
+  pinMode(led1pin, OUTPUT);
+  pinMode(led2pin, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+ 
+  
+  if (distance>3 && distance<168)
+  {
+    digitalWrite(led1pin, HIGH);
+    digitalWrite(led2pin, LOW);
+    Serial.println("LED 1 is GLOWING");
+  }
+  else if(distance>168 && distance<335)
+  {
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, HIGH);
+    Serial.println("LED 2 is GLOWING");
+  }
+  else
+  {
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, LOW);
+    Serial.println("NO LED GLOWING");
+  }
+  
+  
+  Serial.println("Distance: ");
+  Serial.print(distance);
+  Serial.println(" cm");
+  
+  delay(500);
+}

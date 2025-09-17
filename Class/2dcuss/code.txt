@@ -1,0 +1,67 @@
+int trig = 1;
+int echo = 2;
+
+int en1Pin = 3;
+int in1 = 4;
+int in2 = 5;
+
+int en2Pin = 6;
+int in3 = 7;
+int in4 = 8;
+
+long duration;
+int distance;
+
+void setup() {
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+
+  pinMode(en1Pin, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+
+  pinMode(en2Pin, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  duration = pulseIn(echo, HIGH, 20000);
+  distance = duration * 0.034 / 2;
+
+  if (distance > 2 && distance <= 167) {
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(en1Pin, HIGH);
+
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    digitalWrite(en2Pin, HIGH);
+  } 
+  else if (distance > 167 && distance <= 334) {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    digitalWrite(en1Pin, HIGH);
+
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+    digitalWrite(en2Pin, HIGH);
+  } 
+  else {
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
+    digitalWrite(en1Pin, LOW);
+
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, LOW);
+    digitalWrite(en2Pin, LOW);
+  }
+
+  delay(200);
+}

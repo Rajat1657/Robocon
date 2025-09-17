@@ -1,0 +1,148 @@
+// C++ code
+
+int m1i2 = 4;
+int m1i1 = 2;
+int m1en = 5;
+int m2i1 = 7;
+int m2i2 = 6;
+int m2en = 3;
+int m3i1 = 10;
+int m3i2 = 11;
+int m3en = 9;
+
+void setup()
+{
+  pinMode(m1i1,OUTPUT);
+  pinMode(m1i2,OUTPUT);
+  pinMode(m1en,OUTPUT);
+  pinMode(m2i1,OUTPUT);
+  pinMode(m2i2,OUTPUT);
+  pinMode(m2en,OUTPUT);
+  pinMode(m3i1,OUTPUT);
+  pinMode(m3i2,OUTPUT);
+  pinMode(m3en,OUTPUT);
+  Serial.begin(9600);
+}
+
+void stopAll()
+{
+  analogWrite(m1en,0);
+  analogWrite(m2en,0);
+  analogWrite(m3en,0);
+}
+
+void loop()
+{
+  if(Serial.available())
+  {
+    char c=Serial.read();
+    if(c=='8')
+    {
+      digitalWrite(m1i1,0);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,0);
+      digitalWrite(m2i1,1);
+      digitalWrite(m2i2,0);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1,1);
+      digitalWrite(m3i2,0);
+      analogWrite(m3en,255);
+    }
+    else if(c=='2')
+    {
+      digitalWrite(m1i1,0);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,0);
+      digitalWrite(m2i1,0);
+      digitalWrite(m2i2,1);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1,0);
+      digitalWrite(m3i2,1);
+      analogWrite(m3en,255);
+    }
+    else if(c=='4')
+    {
+      digitalWrite(m1i1,0);
+      digitalWrite(m1i2,1);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1,1);
+      digitalWrite(m2i2,0);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1, 0);
+      digitalWrite(m3i2, 1);
+      analogWrite(m3en,255);
+    }
+    else if(c=='6')
+    {
+      digitalWrite(m1i1,1);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1,0);
+      digitalWrite(m2i2,1);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1, 1);
+      digitalWrite(m3i2, 0);
+      analogWrite(m3en,255);
+    }
+    else if(c=='7')
+    {
+      digitalWrite(m1i1,0);
+      digitalWrite(m1i2,1);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1,1);
+      digitalWrite(m2i2,0);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1, 1);
+      digitalWrite(m3i2, 0);
+      analogWrite(m3en,255);
+    }
+    else if(c=='9')
+    {
+      digitalWrite(m1i1,1);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1, 1);
+      digitalWrite(m2i2, 0);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1,1);
+      digitalWrite(m3i2,0);
+      analogWrite(m3en,255);
+    }
+    else if(c=='1')
+    {
+      digitalWrite(m1i1,0);
+      digitalWrite(m1i2,1);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1, 0);
+      digitalWrite(m2i2, 1);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1,0);
+      digitalWrite(m3i2,1);
+      analogWrite(m3en,255);
+    }
+    else if(c=='3')
+    {
+      digitalWrite(m1i1,1);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1,0);
+      digitalWrite(m2i2,1);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1, 0);
+      digitalWrite(m3i2, 1);
+      analogWrite(m3en,255);
+    }
+    else if(c=='5')
+    {
+      digitalWrite(m1i1,1);
+      digitalWrite(m1i2,0);
+      analogWrite(m1en,255);
+      digitalWrite(m2i1,1);
+      digitalWrite(m2i2,0);
+      analogWrite(m2en,255);
+      digitalWrite(m3i1, 0);
+      digitalWrite(m3i2, 1);
+      analogWrite(m3en,255);
+    }
+  }
+}

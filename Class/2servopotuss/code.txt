@@ -1,0 +1,55 @@
+#include <Servo.h>
+
+int pot = A5;
+int trig = 3;
+int echo = 2;
+
+Servo s1;
+Servo s2;
+
+long duration;
+int distance;
+
+void setup() {
+  pinMode(pot, INPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  s1.attach(6);
+  s2.attach(5);
+}
+
+void loop() {
+  int potVal = analogRead(pot);
+  int pDelay = map(potVal, 0, 1023, 5, 50);
+
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo, HIGH, 20000);
+  distance = duration * 0.034 / 2;
+  int uDelay = map(distance, 0, 335, 5, 50);
+  uDelay = constrain(uDelay, 5, 50);
+
+  for (int i = 0; i <= 180; i++) {
+    s1.write(i);
+    delay(pDelay);
+  }
+  for (int i = 180; i >= 0; i--) {
+    s1.write(i);
+    delay(pDelay);
+  }
+  while (int a>0)
+  {
+    for (int j = 0; j <= 180; j++) {
+      s2.write(j);
+      delay(uDelay);
+    }
+    for (int j = 180; j >= 0; j--) {
+      s2.write(j);
+      delay(uDelay);
+    }
+    a++
+  }
+}

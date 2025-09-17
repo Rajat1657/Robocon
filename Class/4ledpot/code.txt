@@ -1,0 +1,54 @@
+// C++ code
+//
+
+int led1pin = 2;
+int led2pin = 4;
+int led3pin = 7;
+int led4pin = 8;
+int pot = A5;
+void setup()
+{
+  pinMode(led1pin, OUTPUT);
+  pinMode(led2pin, OUTPUT);
+  pinMode(led3pin, OUTPUT);
+  pinMode(led4pin, OUTPUT);
+  pinMode(pot, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int potval;
+  potval = analogRead(pot);
+  Serial.println(potval);
+  if (potval>0 && potval<250) {
+    digitalWrite(led1pin, HIGH);
+    digitalWrite(led2pin, LOW);
+    digitalWrite(led3pin, LOW);
+    digitalWrite(led4pin, LOW);
+  }
+  else if (potval>250 && potval<500) {
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, HIGH);
+    digitalWrite(led3pin, LOW);
+    digitalWrite(led4pin, LOW);
+  }
+  else if (potval>500 && potval<800) {
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, LOW);
+    digitalWrite(led3pin, HIGH);
+    digitalWrite(led4pin, LOW);
+  }
+  else if (potval>800 && potval<1023){
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, LOW);
+    digitalWrite(led3pin, LOW);
+    digitalWrite(led4pin, HIGH);
+  }
+  else {
+    digitalWrite(led1pin, LOW);
+    digitalWrite(led2pin, LOW);
+    digitalWrite(led3pin, LOW);
+    digitalWrite(led4pin, LOW);
+  }
+}

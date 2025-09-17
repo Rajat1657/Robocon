@@ -1,0 +1,44 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+int pot = A3;
+int en = 5;
+int in1 = 4;
+int in2 = 3;
+
+void setup()
+{
+  pinMode(en, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+  lcd.print("DC Motor RPM");
+  delay(1000);
+}
+
+void loop()
+{
+  int potValue = analogRead(pot);
+  int pwmValue = map(potValue, 0, 1023, 0, 255);
+  analogWrite(en, pwmValue);
+
+  int rpm = map(pwmValue, 0, 255, 0, 16530);
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Pot value:");
+  lcd.print(pwmValue);
+
+  lcd.setCursor(0, 1);
+  lcd.print("RPM:");
+  lcd.print(rpm);
+
+  delay(300);
+}

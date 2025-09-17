@@ -1,0 +1,33 @@
+#include<Servo.h>
+
+// C++ code
+
+Servo s1;
+Servo s2;
+void setup()
+{
+  s1.attach(3);
+  s2.attach(5);
+  Serial.begin(9600);
+  Serial.println("Enter angle");
+  s1.write(0);
+  s2.write(0);
+}
+
+void loop()
+{
+  int ang;
+  if (Serial.available()>0)
+  {
+	s1.write(0);
+  	s2.write(0);
+    ang = Serial.parseInt();
+    Serial.println(ang);
+    for (int i=0; i<ang; i++)
+    {
+    	s1.write(i);
+  		s2.write(i);
+  
+    }	
+  }
+}

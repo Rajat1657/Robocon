@@ -1,0 +1,64 @@
+#include <Servo.h>
+
+int switchState=2;
+int trig1 = 3;
+int echo1 = 7;
+int trig2 = 4;
+int echo2 = 5;
+Servo s;
+void setup()
+{
+  pinMode(switchState, INPUT);
+  pinMode(trig1, OUTPUT);
+  pinMode(echo1, INPUT);
+  pinMode(trig2, OUTPUT);
+  pinMode(echo2, INPUT);
+  s.attach(6);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int angle = s.read();
+  int switch1 = digitalRead(switchState);
+  digitalWrite(trig1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig1, LOW);
+  int dure1 = pulseIn(echo1, HIGH);
+  int dist1 = dure1 * 0.0343 / 2;
+  
+  digitalWrite(trig2, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig2, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig2, LOW);
+  int dure2 = pulseIn(echo2, HIGH);
+  int dist2 = dure2 * 0.0343 / 2;
+  int initial;
+  if (switch1==LOW)
+  {
+  	if (dist1 > 2 && dist1 <= 200)
+    {
+      s.write(0);
+      initial = 0;
+    }
+    else if (dist1 > 200 && dist1 <335) 
+    {
+      s.write(180);
+      initial = 180;
+    }
+  }
+  else if (switch1==HIGH) 
+  {
+    int turn = (180-initial);
+  	int speed = map(dist2, 2, 335, 0, 200);
+    for (int i=0; i<turn; i++) 
+    {
+      s.write(i);
+      delay(speed);
+    }
+  }
+  Serial.println(switch1);
+}
